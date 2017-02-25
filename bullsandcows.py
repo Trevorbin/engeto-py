@@ -24,6 +24,7 @@ def gen_number():
                 break
     return secret
 
+
 #function for comparation numbers
 def compare_num (data , secret):
     debug = 0
