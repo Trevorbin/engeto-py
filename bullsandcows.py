@@ -26,7 +26,7 @@ def gen_number():
 
 
 #function for comparation numbers
-def compare_num (data , secret):
+def compare_num(data, secret):
     debug = 0
 
     cows = 0
@@ -52,17 +52,16 @@ def compare_num (data , secret):
                 print ( "i: %d" % i)
             if match[i] != 'X':  # was a BULL?
                 for n in range(4):
-                    if match[n] != 'x':  # was a COW?
+                    if debug == 1:
+                        print("i: %d n: %d" % (i, n))
+                    if str(data)[i] == str(secret)[n]:
                         if debug == 1:
-                            print("i: %d n: %d" % (i, n))
-                        if str(data)[i] == str(secret)[n]:
-                            if debug == 1:
-                                print("COW i: %d n: %d" % (i, n))
+                            print("COW i: %d n: %d" % (i, n))
                             match[n] = 'x'  # COW - dont use this position from secret
-                            cows += 1
-                            if debug == 1:
-                                print("MATCH: %s" % match)
-                            continue
+                        cows += 1
+                        if debug == 1:
+                            print("MATCH: %s" % match)
+                        continue
     return [ bulls, cows ]
 
 # main program
@@ -74,10 +73,11 @@ if __name__ == '__main__':
     guesses = 0
 
     # secret = 9123
-    print("SECRET: " + secret + "\n")
+    if debug == 1:
+        print("SECRET: " + secret + "\n")
 
-    while True:            #main cycle
-        again = True    #read user number
+    while True:             # Main cycle
+        again = True        # Read user number
         while again:
             data = str(input("Enter a number:"))  # input returns string
             again = False
@@ -94,7 +94,7 @@ if __name__ == '__main__':
                 print("Please give 4 numbers.")
                 continue            # wrong length, try it again
 
-            for a in range(4):      # Is it unique?
+            for a in range(3):      # Is it unique?
                 for b in range(a + 1, 4):
                     if data[a] == data[b]:
                         print("Please give 4 UNIQUE numbers.")
@@ -107,8 +107,8 @@ if __name__ == '__main__':
         if debug == 1:
             print("Return of func compare_num %d" % d)
 
-        print("BULLS: %s COWS: %s" % (d[0], d[1]))
-
         if ( d[0] == 4 ):           # Does bulls equal 4?
             print("Correct, you've guessed the right number in %d guesses!" % guesses)
-            break;
+            break
+
+        print("BULLS: %s COWS: %s" % (d[0], d[1]))
