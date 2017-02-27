@@ -1,6 +1,6 @@
 import random
 
-#function for generation random number
+#function for generation of random number
 def gen_number():
     debug = 0
 
